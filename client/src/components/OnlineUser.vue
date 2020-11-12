@@ -1,14 +1,18 @@
 <template>
   <div class="online-user">
-    <div >
+    <div class="user-card">
       <img id="user-avatar" src="../assets/userbot.svg" alt="" />
-      <p>sadsadsada</p>
+      <div class="user-detail">
+        <h6>{{ user.name }}</h6>
+        <p>100 points</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "OnlineUser",
+	name: "OnlineUser",
+	props: ['user']
 };
 </script>

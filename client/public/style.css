@@ -55,8 +55,7 @@ body {
   height: 95px;
   border-bottom: solid 1px black;
   background-color: pink;
-  border-radius: 10px;
-  margin-top: 10px;
+  border-radius: 5px;
 }
 
 input[type=text], select {
@@ -87,4 +86,16 @@ input[type=text], select {
 /* Online User Sidebar */
 #user-avatar {
   width: 70px;
+}
+
+.user-card {
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.user-detail {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 }

@@ -34,18 +34,12 @@ export default {
   },
   methods: {
     login() {
-			console.log('User is logged in')
+      console.log('User is logged in')
+      console.log(this.username)
       localStorage.setItem("name", this.username);
       this.$socket.emit("userLogin", { name: this.username});
       this.$router.push({ name: "GameRoom" });
     },
-  },
-  // sockets: {
-  //   userLogin(onlineUsers) {
-  //     this.name = localStorage.getItem("name");
-  //     console.log(onlineUsers, "<<< CURRENT USERS LOGGIN IN");
-  //     this.onlineUsers = onlineUsers;
-  //   },
-  // },
+  }
 }
 </script>
