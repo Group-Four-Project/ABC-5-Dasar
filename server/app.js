@@ -12,6 +12,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 
 let onlineUser = []
+let messages = []
 
 io.on('connection', (socket) => {
   console.log('a user connected')
@@ -21,8 +22,13 @@ io.on('connection', (socket) => {
     onlineUser.push(name)
     io.emit('login', onlineUser)
   })
+
+  socket.on('sendMessage', (message) => {
+    messages.push(message)
+    io.emit('sendMessage', message)
+  })
 })
 
 http.listen(port, () => {
-  console.log(`listening on port ${port}`)
+  console.log(`listening on port http://localhost:${port}`)
 })
