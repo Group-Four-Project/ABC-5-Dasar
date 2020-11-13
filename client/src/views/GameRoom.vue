@@ -5,10 +5,6 @@
     </div>
 
     <div class="alphabet">
-      <div class="d-flex justify-content-center align-self-end">
-          <button @click="letterRandom" type="button" class="btn btn-primary">Generate Letter</button>                 
-      </div>
-      <h1>{{letter}}</h1>
       <div class="category">
         <div class="title-category">Tebak Nama Artis</div>
         <div class="col-category">
@@ -16,10 +12,10 @@
         </div>
       </div>
       <div class="generate-letter">
-        <div class="display-letter">Y</div>
         <div>
-          <button class="button-letter" type="submit">Generate</button>
+          <button @click="letterRandom" class="button-letter" type="submit">Generate</button>
         </div>
+        <div class="display-letter">{{ letter }}</div>
       </div>
     </div>
 
@@ -28,24 +24,9 @@
         <div class="form-chat">
           <div class="interaction-answer">JAWABAN</div>
           <div class="overflow-auto">
-          <i class="material-icons" style="color: #007af8;">edit</i>
-            Isi chat di sini
+             <ChatBoxUser v-for="(msg, i) in messages" :key="i" :msg="msg"/>
           </div>
-          <form class="input-chat" action="">
-            <input type="text" placeholder="Jawab Disini" />
-          </form>
-        </div>
-      </div>
-      <div class="answer">
-        <div class="form-chat">
-          <div class="interaction-answer">OBROLAN</div>
-          <div class="overflow-auto">
-          <i class="material-icons" style="color: #007af8;">edit</i>
-            Isi chat di sini
-          </div>
-          <div class="overflow-auto">Isi chat di sini</div>
-          <ChatBoxUser v-for="(msg, i) in messages" :key="i" :msg="msg"/>
-            <form @submit.prevent="chat" class="input-chat">
+          <form @submit.prevent="chat" class="input-chat">
             <input
              type="text" 
              v-model="message"
@@ -62,6 +43,7 @@
 <script>
 import OnlineUser from "@/components/OnlineUser.vue"
 import ChatBoxUser from "@/components/ChatBoxUser.vue"
+import Swal from 'sweetalert2'
 
 export default {
   name: "GameRoom",
@@ -90,7 +72,6 @@ export default {
       this.$store.dispatch('letterRandom')  
       this.$socket.emit('showLetter', this.$store.state.alphabet);
     },
-
     gameOver () { 
       localStorage.clear()
       this.$socket.emit('gameOver')
@@ -114,7 +95,7 @@ export default {
        this.messages = messages
      },
      gameOver() { 
-       // display dengan sweat alert 
+       this.$swal('Game Over!', 'play again?', 'warning')
      }
 
   },
