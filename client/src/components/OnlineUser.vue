@@ -10,7 +10,7 @@
       <span>106 poin</span>
     <div class="user-card">
       <img id="user-avatar" src="../assets/userbot.svg" alt="" />
-      <div class="user-detail">
+      <div class="user-detail" v-if="user">
         <h6>{{ user.name }}</h6>
         <p>100 points</p>
       </div>
