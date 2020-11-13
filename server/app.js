@@ -8,7 +8,10 @@ const io = require('socket.io')(http)
 app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+
+
+let onlineUser = []
+let messages = []
 
 let onlineUsers = []
 let messages = []
@@ -23,6 +26,7 @@ io.on('connection', (socket) => {
   })
 
   socket.on('sendMessage', (message) => {
+
     messages.push(message.message)
     io.emit('sendMessage', messages)
 
@@ -44,7 +48,6 @@ io.on('connection', (socket) => {
       letter = ''
     io.emit('gameOver')
   })
-
 
 })
 
