@@ -12,6 +12,7 @@ app.use(express.urlencoded({extended : true}))
 
 let onlineUsers = []
 let messages = []
+let number = []
 
 io.on('connection', (socket) => {
     console.log('a user connected');
@@ -27,6 +28,12 @@ io.on('connection', (socket) => {
     console.log(messages);
     io.emit('sendMessage', message)
   })
+
+  socket.on('randomNumber', (initiaRandom) => {
+    number.push(initiaRandom) 
+    console.log(number);
+  })
+
 })
 
 http.listen(PORT, () => console.log(`listen localhost:${PORT}`))

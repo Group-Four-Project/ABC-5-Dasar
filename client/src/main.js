@@ -8,7 +8,11 @@ Vue.config.productionTip = false
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://localhost:3000'  // jembatannya
+  connection: 'http://localhost:3000',  // jembatannya
+  vuex: { 
+    store, 
+    mutationPrefix: 'SOCKET_'
+  }
 }))
 
 new Vue({

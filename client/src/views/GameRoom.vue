@@ -5,7 +5,13 @@
       <OnlineUser />
     </div>
 
-    <div class="alphabet"></div>
+    <div class="alphabet">
+      <div class="d-flex justify-content-center align-self-end">
+          <button @click="randomNumber" type="button" class="btn btn-primary" :disabled="isActive">Dice</button>                 
+      </div>
+      <h1>{{initialRandom}}</h1>
+    </div>
+
 
 
     <div class="box-chat">
@@ -28,7 +34,7 @@
 </template>
 
 <script>
-import OnlineUser from "@/components/OnlineUser.vue";
+import OnlineUser from "@/components/OnlineUser.vue"
 import ChatBoxUser from "@/components/ChatBoxUser.vue"
 export default {
   name: "GameRoom",
@@ -37,7 +43,9 @@ export default {
       name: '',
       message: '',
       onlineUsers: [],
-      messages: []
+      messages: [], 
+      initialRandom: 1,
+      isActive: false
     }
   },
   methods : { 
@@ -47,7 +55,17 @@ export default {
         message : this.message
       }
       this.$socket.emit('sendMessage', payload)
+    }, 
+
+    randomNumber () { 
+      const random = Math.floor(Math.random() * 6 + 1) 
+      this.initialRandom = random
+      console.log(this.initialRandom);
+      this.$socket.emit('randomNumber', this.initialRandom);
+      this.isActive = true
+      
     }
+    
   },
   sockets: {
     userLogin(onlineUsers) {
@@ -57,7 +75,8 @@ export default {
     },
    sendMessage(messages){
       this.messages = messages
-    }
+    }, 
+    
 
 
   },
@@ -71,5 +90,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+  #dice { 
+    display: flex;
+    justify-content: center;
+    align-items: end;
+  }  
 </style>
