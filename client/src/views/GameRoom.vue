@@ -45,6 +45,7 @@
 <script>
 import OnlineUser from "@/components/OnlineUser.vue"
 import ChatBoxUser from "@/components/ChatBoxUser.vue"
+import Swal from 'sweetalert2'
 
 export default {
   name: "GameRoom",
@@ -73,7 +74,6 @@ export default {
       this.$store.dispatch('letterRandom')  
       this.$socket.emit('showLetter', this.$store.state.alphabet);
     },
-
     gameOver () { 
       localStorage.clear()
       this.$socket.emit('gameOver')
@@ -98,7 +98,7 @@ export default {
        this.messages = messages
      },
      gameOver() { 
-       // display dengan sweat alert 
+       this.$swal('Game Over!', 'play again?', 'warning')
      }
 
   },
