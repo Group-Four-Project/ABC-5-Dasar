@@ -6,18 +6,28 @@ export default new Vuex.Store({
   state: {
     initialNumber : 0,
     onlineUsers : [], 
-    messages : []
+    messages : [],
+    alphabet : ''
   },
   mutations: {
     'SOCKET_USER_CONNECTED' (state, payload) { 
       state.onlineUsers = payload,
       state.messages = payload
+    }, 
+    setLetter (state, letter) { 
+      state.alphabet = letter
     }
   },
   actions: {
-    randomNumber (context) { 
-      const random = Math.floor(Math.random()* 6) 
-    }
+    letterRandom (context) { 
+      // const random = Math.ceil(Math.random()* 26)
+      var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      const letter = characters.charAt(Math.ceil(Math.random() * 26))
+      context.commit('setLetter', letter)
+    }, 
+  //   letterGenerator () {
+  
+  // }
   },
   modules: {
   }

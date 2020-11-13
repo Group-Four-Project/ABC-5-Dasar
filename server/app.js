@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended : true}))
 
 let onlineUsers = []
 let messages = []
-let number = []
-
+let letter = ''
+let userName = ''
 io.on('connection', (socket) => {
     console.log('a user connected');
 
@@ -24,15 +24,19 @@ io.on('connection', (socket) => {
   })
 
   socket.on('sendMessage', (message) => {
-    messages.push(message)
-    console.log(messages);
-    io.emit('sendMessage', message)
+    messages.push(message.message)
+    // messages.push(message)
+    // io.emit('sendMessage', messages)
+    io.emit('sendMessage', messages)
+
   })
 
-  socket.on('randomNumber', (initiaRandom) => {
-    number.push(initiaRandom) 
-    console.log(number);
+  socket.on('showLetter', (data) => { 
+    letter = data
+    console.log(letter);
+    io.emit("showLetter", letter)
   })
+
 
 })
 

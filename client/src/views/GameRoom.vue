@@ -7,12 +7,10 @@
 
     <div class="alphabet">
       <div class="d-flex justify-content-center align-self-end">
-          <button @click="randomNumber" type="button" class="btn btn-primary" :disabled="isActive">Dice</button>                 
+          <button @click="letterRandom" type="button" class="btn btn-primary" :disabled="isActive">Generate Letter</button>                 
       </div>
-      <h1>{{initialRandom}}</h1>
+      <h1>{{alphabet}}</h1>
     </div>
-
-
 
     <div class="box-chat">
       <div class="answer">
@@ -42,42 +40,44 @@ export default {
     return {
       name: '',
       message: '',
+      letter,
       onlineUsers: [],
       messages: [], 
-      initialRandom: 1,
-      isActive: false
+    }
+  },
+
+  computed: { 
+    
+    alphabet () { 
+      return this.$store.state.alphabet
     }
   },
   methods : { 
     chat(messages) {
       let payload = { 
-        name : this.name,
+        // name : this.name,
         message : this.message
       }
       this.$socket.emit('sendMessage', payload)
     }, 
-
-    randomNumber () { 
-      const random = Math.floor(Math.random() * 6 + 1) 
-      this.initialRandom = random
-      console.log(this.initialRandom);
-      this.$socket.emit('randomNumber', this.initialRandom);
-      this.isActive = true
-      
+    letterRandom () { 
+      this.$store.dispatch('letterRandom')  
+      this.$socket.emit('showLetter', this.$store.state.alphabet);
     }
-    
   },
   sockets: {
     userLogin(onlineUsers) {
       this.name = localStorage.getItem("name");
-      console.log(onlineUsers[1], "<<< CURRENT USERS LOGGIN IN");
       this.onlineUsers = onlineUsers;
     },
-   sendMessage(messages){
-      this.messages = messages
-    }, 
-    
+   sendMessage(data){
+      this.messages = data
+      console.log(this.messages, '<<< sendMessage');
 
+    },
+    showLetter(letter) { 
+      this.letter = letter
+    } 
 
   },
   components: {
