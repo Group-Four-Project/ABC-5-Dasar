@@ -8,11 +8,12 @@
     </div>
     <div class="point-avatar">
       <span>106 poin</span>
-    <div class="user-card">
-      <img id="user-avatar" src="../assets/userbot.svg" alt="" />
-      <div class="user-detail">
-        <h6>{{ user.name }}</h6>
-        <p>100 points</p>
+      <div class="user-card">
+        <img id="user-avatar" src="../assets/avatars/n.svg" alt="" />
+        <div class="user-detail">
+          <h6>{{ user.name }}</h6>
+          <p>100 points</p>
+        </div>
       </div>
     </div>
   </div>
@@ -20,7 +21,7 @@
 
 <script>
 export default {
-	name: "OnlineUser",
-	props: ['user']
+  name: "OnlineUser",
+  props: ["user"],
 };
 </script>
