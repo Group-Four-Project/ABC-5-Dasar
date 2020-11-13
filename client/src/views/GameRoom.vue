@@ -4,25 +4,16 @@
       <OnlineUser v-for="(user, i) in onlineUsers" :key="i" :user="user" />
       <OnlineUser />
     </div>
-
-    <div class="alphabet"></div>
-
-    <div class="box-chat">
-      <div class="answer">
-        <div class="form-chat">
-          <div class="overflow-auto">Isi chat di sini</div>
-          <form class="input-chat" action="">
-            <input type="text" placeholder="Jawab Disini" />
-          </form>
-        </div>
-      </div>
-      <div class="chat"></div>
-    </div>
+    <GameCategory />
+    <ChatBox />
   </div>
 </template>
 
 <script>
 import OnlineUser from "@/components/OnlineUser.vue";
+import ChatBox from "@/components/ChatBox.vue" 
+import GameCategory from "@/components/GameCategory.vue"
+
 export default {
   name: "GameRoom",
   data() {
@@ -39,6 +30,8 @@ export default {
   },
   components: {
     OnlineUser,
+    ChatBox,
+    GameCategory
   },
 };
 </script>
