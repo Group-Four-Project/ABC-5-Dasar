@@ -26,14 +26,13 @@ body {
   background-color: #FFF;
   float: left;
   margin-right: 30px;
-  margin-top: 50px;
   border-radius: 10px;
   margin-bottom: 50px;
   padding-top: 10px;
+  margin-top: 60px;
 }
 
 .alphabet {
-  margin-top: 50px;
   width: 750px;
   height: 300px;
   background-color: #fff;
@@ -255,6 +254,7 @@ input[type=text], select {
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
+  margin-top: 30px;
 }
 
 .button-letter:hover {
@@ -273,4 +273,17 @@ input[type=text], select {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+}
+
+.super {
+ 
+  position: absolute;
+}
+
+p {
+  color: #868D96
+}
+
+h5 {
+  color: #6a6e74
 }

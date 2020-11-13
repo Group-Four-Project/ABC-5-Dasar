@@ -1,9 +1,11 @@
 <template>
   <div class="container">
+    <button @click="gameOver">
+      <i class="material-icons" style="color: #000; margin-top: 20px">close</i>Logout
+    </button>
     <div class="user">
       <OnlineUser v-for="(user, i) in onlineUsers" :key="i" :user="user" />
     </div>
-
     <div class="alphabet">
       <div class="category">
         <div class="title-category">Tebak Nama Artis</div>
@@ -75,6 +77,7 @@ export default {
     gameOver () { 
       localStorage.clear()
       this.$socket.emit('gameOver')
+      this.$router.push('Login')
     }
 
   },
