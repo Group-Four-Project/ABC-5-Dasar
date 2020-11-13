@@ -1,24 +1,25 @@
 <template>
-  <div class="home">
-    <h1>ABC 5 Dasar</h1>
-    <div class="enter-game-form container mt-5" style="width: 350px">
-      <div class="row justify-content-center shadow rounded" style="">
-        <div class="p-4">
-          <form @submit.prevent="login">
-            <div class="form-group">
-              <label>Username</label>
-              <input
-                v-model="username"
-                type="text"
-                class="form-control"
-                placeholder="Enter your username here"
-              />
-            </div>
-            <div class="form-group form-check"></div>
-            <button type="submit" class="login-btn">Enter Game</button>
-          </form>
+  <div class="container">
+    <div class="header-logo">
+      <img src="../assets/img/abc.svg" alt="">
+    </div>
+    <div class="box-login">
+      <div>
+        <img src="../assets/img/Screenshot from 2020-11-13 02-07-52.png" style="margin-top: 30px" alt="">
+        <div class="gTitle">
+          <span>MAIN LANGSUNG</span>
         </div>
       </div>
+      <form class="form-group mt-3" @submit.prevent="login">
+        <input
+          v-model="username"
+          type="text"
+          class="form-control"
+          placeholder="Enter your username here"
+        />
+        <div class="form-group form-check "></div>
+        <button type="submit" class="button btYellowBig">Enter Game</button>
+      </form>
     </div>
   </div>
 </template>
@@ -49,3 +50,7 @@ export default {
   // },
 }
 </script>
+
+<style scoped>
+
+</style>
