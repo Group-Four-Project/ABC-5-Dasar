@@ -2,14 +2,13 @@
   <div class="container">
     <div class="user">
       <OnlineUser v-for="(user, i) in onlineUsers" :key="i" :user="user" />
-      <OnlineUser />
     </div>
 
     <div class="alphabet">
       <div class="d-flex justify-content-center align-self-end">
-          <button @click="letterRandom" type="button" class="btn btn-primary" :disabled="isActive">Generate Letter</button>                 
+          <button @click="letterRandom" type="button" class="btn btn-primary">Generate Letter</button>                 
       </div>
-      <h1>{{alphabet}}</h1>
+      <h1>{{letter}}</h1>
     </div>
 
     <div class="box-chat">
@@ -40,14 +39,12 @@ export default {
     return {
       name: '',
       message: '',
-      letter,
+      letter: '',
       onlineUsers: [],
       messages: [], 
     }
   },
-
-  computed: { 
-    
+  computed: {     
     alphabet () { 
       return this.$store.state.alphabet
     }
@@ -55,7 +52,6 @@ export default {
   methods : { 
     chat(messages) {
       let payload = { 
-        // name : this.name,
         message : this.message
       }
       this.$socket.emit('sendMessage', payload)
@@ -63,7 +59,13 @@ export default {
     letterRandom () { 
       this.$store.dispatch('letterRandom')  
       this.$socket.emit('showLetter', this.$store.state.alphabet);
+    },
+
+    gameOver () { 
+      localStorage.clear()
+      this.$socket.emit('gameOver')
     }
+
   },
   sockets: {
     userLogin(onlineUsers) {
@@ -77,15 +79,21 @@ export default {
     },
     showLetter(letter) { 
       this.letter = letter
-    } 
+    },
+     showHistory(messages) { 
+       this.messages = messages
+     },
+     gameOver() { 
+       // display dengan sweat alert 
+     }
 
   },
   components: {
     OnlineUser,
     ChatBoxUser
-  },
+  }, 
   created() { 
-    this.name = localStorage.name
+    this.$socket.emit('showHistory')
   }
 };
 </script>

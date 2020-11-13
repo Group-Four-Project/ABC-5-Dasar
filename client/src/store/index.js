@@ -10,10 +10,10 @@ export default new Vuex.Store({
     alphabet : ''
   },
   mutations: {
-    'SOCKET_USER_CONNECTED' (state, payload) { 
-      state.onlineUsers = payload,
-      state.messages = payload
-    }, 
+    // 'SOCKET_USER_CONNECTED' (state, payload) { 
+    //   state.onlineUsers = payload,
+    //   state.messages = payload
+    // }, 
     setLetter (state, letter) { 
       state.alphabet = letter
     }
