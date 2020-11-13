@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="user">
-      <OnlineUser />
+      <OnlineUser v-for="(user, i) in onlineUsers" :key="i" :user="user" />
       <OnlineUser />
       <OnlineUser />
       <OnlineUser />
@@ -44,6 +44,7 @@
           <i class="material-icons" style="color: #007af8;">edit</i>
             Isi chat di sini
           </div>
+          <div class="overflow-auto">Isi chat di sini</div>
           <form class="input-chat" action="">
             <input type="text" placeholder="Jawab Disini" />
           </form>
@@ -55,15 +56,26 @@
 </template>
 
 <script>
-import OnlineUser from '@/components/OnlineUser.vue'
+import OnlineUser from "@/components/OnlineUser.vue";
 export default {
-  name: 'GameRoom',
+  name: "GameRoom",
+  data() {
+    return {
+      onlineUsers: [],
+    };
+  },
+  sockets: {
+    userLogin(onlineUsers) {
+      this.name = localStorage.getItem("name");
+      console.log(onlineUsers[1], "<<< CURRENT USERS LOGGIN IN");
+      this.onlineUsers = onlineUsers;
+    },
+  },
   components: {
-    OnlineUser
-  }
-}
+    OnlineUser,
+  },
+};
 </script>
 
 <style>
-
 </style>

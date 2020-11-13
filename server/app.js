@@ -11,15 +11,15 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 
-let onlineUser = []
+let onlineUsers = []
 
 io.on('connection', (socket) => {
   console.log('a user connected')
 
   socket.on('userLogin', (name) => {
     console.log(name, '<><><><><> ini name dari server')
-    onlineUser.push(name)
-    io.emit('login', onlineUser)
+    onlineUsers.push(name)
+    io.emit('userLogin', onlineUsers)
   })
 })
 
